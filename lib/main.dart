@@ -23,12 +23,35 @@ class ScoreHome extends StatefulWidget {
 }
 
 class _ScoreHomeState extends State<ScoreHome> {
+  int num = 0;
+  void increaseNum() {
+    setState(() {
+      num++;
+    });
+  }
+
+  void decreaseNum() {
+    setState(() {
+      num--;
+    });
+  }
+
+  void resetNum() {
+    setState(() {
+      num = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Score Changer"),
         centerTitle: true,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.restore_outlined),
+        onPressed: resetNum,
       ),
       body: Column(
         children: [
@@ -48,10 +71,10 @@ class _ScoreHomeState extends State<ScoreHome> {
           SizedBox(height: 10),
           Center(
             child: Text(
-              "0",
+              num.toString(),
               style: TextStyle(
                 color: Colors.green,
-                fontSize: 90,
+                fontSize: 125,
                 fontWeight: FontWeight.w800,
               ),
             ),
@@ -59,18 +82,37 @@ class _ScoreHomeState extends State<ScoreHome> {
           SizedBox(
             height: 25,
           ),
-          Row(
-            children: [
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  
+          Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.blue,
+                  ),
+                  child: const Text(
+                    "Increase",
+                    style: TextStyle(fontSize: 24),
+                  ),
+                  onPressed: increaseNum,
                 ),
-                child: Text("Increase"),\
-                onPressed: (){},
-
-              )
-            ],
+                SizedBox(
+                  width: 15,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                  child: const Text(
+                    "Increase",
+                    style: TextStyle(
+                      fontSize: 24,
+                    ),
+                  ),
+                  onPressed: decreaseNum,
+                ),
+              ],
+            ),
           )
         ],
       ),
